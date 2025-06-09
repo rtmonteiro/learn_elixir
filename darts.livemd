@@ -1,21 +1,4 @@
-<!-- livebook:{"default_language":"python"} -->
-
 # Darts
-
-```elixir
-Mix.install([
-  {:pythonx, "~> 0.4.2"},
-  {:kino_pythonx, "~> 0.1.0"}
-])
-```
-
-```pyproject.toml
-[project]
-name = "project"
-version = "0.0.0"
-requires-python = "==3.13.*"
-dependencies = []
-```
 
 ## Resolving
 
@@ -28,26 +11,22 @@ defmodule Darts do
   """
   @spec score(position) :: integer
   def score({x, y}) do
-    x_abs = abs(x)
-    y_abs = abs(y)
+    # L²=sqrt((x_2 - x_1)²+(y_2 - y_1)²)
+    dist = :math.sqrt(:math.pow(x,2)+:math.pow(y, 2))
+
     cond do
-      x_abs > 10 or y_abs > 10 -> 0
-      x_abs > 5  or y_abs > 5  -> 1
-      x_abs > 1  or y_abs > 1  -> 5
+      dist > 10 -> 0
+      dist > 5 -> 1
+      dist > 1 -> 5
       true -> 10
     end
   end
 end
-
-```
-
-```python
-
 ```
 
 ```elixir
-x_abs = 9
-y_abs = 9
+x_abs = 0.1
+y_abs = 0.1
 cond do
   x_abs > 10 or y_abs > 10 -> 0
   x_abs > 5  or y_abs > 5  -> 1
